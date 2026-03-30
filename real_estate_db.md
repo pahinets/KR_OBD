@@ -91,7 +91,7 @@ CREATE TABLE sales (
 
 ## 2.1. Додавання даних (INSERT)
 
-```
+```sql
 -- Додавання типів та персоналу
 INSERT INTO property_type (type_name, description) VALUES ('Квартира', 'Житло у багатоповерхівці');
 INSERT INTO agents (first_name, last_name, email, specialization) 
@@ -113,7 +113,7 @@ INSERT INTO sales (property_id, buyer_id, agent_id, sale_price, commission_pct)
 VALUES (1, 2, 1, 145000.00, 5.00);
 ```
 ## 2.2. Оновлення та видалення (UPDATE / DELETE)
-```
+```sql
 -- Зміна ціни на доступні об'єкти
 UPDATE properties SET price = price * 0.98 WHERE status = 'доступна';
 
@@ -127,7 +127,7 @@ DELETE FROM viewings WHERE viewing_date < '2024-01-01';
 DELETE FROM clients WHERE phone IS NULL AND email IS NULL;
 ```
 ## 2.3. Прості вибірки (SELECT)
-```
+```sql
 -- Нерухомість конкретного агента
 SELECT address, price, status FROM properties WHERE agent_id = 1;
 
@@ -140,7 +140,7 @@ WHERE v.property_id = 1;
 ## 3. Аналітичні запити (OLAP)
 
 Використання агрегатних функцій, групування та спільних табличних виразів (CTE) для аналізу бізнес-показників.
-```
+```sql
 -- 1. Середня ціна продажу за типом нерухомості
 SELECT pt.type_name, ROUND(AVG(s.sale_price), 2) as avg_price
 FROM sales s
