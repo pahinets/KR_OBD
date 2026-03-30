@@ -6,7 +6,7 @@
 
 Схема побудована на основі ER-діаграми. Для забезпечення цілісності використані первинні та зовнішні ключі (`PRIMARY KEY`, `REFERENCES`), а також перелічувані типи (`ENUM`) для категоріальних даних.
 
-```sql
+```
 -- Налаштування робочого середовища
 SET search_path TO kr;
 
@@ -85,11 +85,14 @@ CREATE TABLE sales (
     commission_pct NUMERIC(4, 2)
 );
 ```
-##2. Операції маніпулювання даними (DML / OLTP)
+## 2. Операції маніпулювання даними (DML / OLTP)
 
 Нижче наведено приклади базових CRUD-операцій: додавання, оновлення, видалення та пошуку даних.
-##2.1. Додавання даних (INSERT)
-```-- Додавання типів та персоналу
+
+## 2.1. Додавання даних (INSERT)
+
+```
+-- Додавання типів та персоналу
 INSERT INTO property_type (type_name, description) VALUES ('Квартира', 'Житло у багатоповерхівці');
 INSERT INTO agents (first_name, last_name, email, specialization) 
 VALUES ('Петро', 'Шевченко', 'petro.agent@example.com', 'Центральний район');
@@ -109,7 +112,7 @@ VALUES (1, 2, 1, CURRENT_DATE, 'Чудовий стан');
 INSERT INTO sales (property_id, buyer_id, agent_id, sale_price, commission_pct)
 VALUES (1, 2, 1, 145000.00, 5.00);
 ```
-##2.2. Оновлення та видалення (UPDATE / DELETE)
+## 2.2. Оновлення та видалення (UPDATE / DELETE)
 ```
 -- Зміна ціни на доступні об'єкти
 UPDATE properties SET price = price * 0.98 WHERE status = 'доступна';
@@ -123,7 +126,7 @@ DELETE FROM viewings WHERE viewing_date < '2024-01-01';
 -- Видалення клієнтів без контактів
 DELETE FROM clients WHERE phone IS NULL AND email IS NULL;
 ```
-##2.3. Прості вибірки (SELECT)
+## 2.3. Прості вибірки (SELECT)
 ```
 -- Нерухомість конкретного агента
 SELECT address, price, status FROM properties WHERE agent_id = 1;
@@ -134,7 +137,7 @@ FROM viewings v
 JOIN clients c ON v.client_id = c.client_id 
 WHERE v.property_id = 1;
 ```
-##3. Аналітичні запити (OLAP)
+## 3. Аналітичні запити (OLAP)
 
 Використання агрегатних функцій, групування та спільних табличних виразів (CTE) для аналізу бізнес-показників.
 ```
