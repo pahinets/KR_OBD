@@ -10,7 +10,7 @@
 -- Налаштування робочого середовища
 SET search_path TO kr;
 
--- Очищення схеми (видалення в порядку, що враховує залежності)
+-- Очищення схеми
 DROP TABLE IF EXISTS sales, viewings, properties, clients, agents, property_type CASCADE;
 DROP TYPE IF EXISTS client_type_enum CASCADE;
 DROP TYPE IF EXISTS property_status_enum CASCADE;
@@ -63,7 +63,7 @@ CREATE TABLE properties (
     listed_date DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
--- Таблиця оглядів (турів)
+-- Таблиця оглядів
 CREATE TABLE viewings (
     viewing_id SERIAL PRIMARY KEY,
     property_id INT REFERENCES properties(property_id) ON DELETE CASCADE,
@@ -71,7 +71,7 @@ CREATE TABLE viewings (
     agent_id INT REFERENCES agents(agent_id),
     viewing_date TIMESTAMP NOT NULL,
     notes TEXT,
-    feedback TEXT -- Тип TEXT для необмеженої довжини відгуків
+    feedback TEXT
 );
 
 -- Таблиця транзакцій продажу
